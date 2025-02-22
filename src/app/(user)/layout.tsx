@@ -1,3 +1,4 @@
+import Footer from "../components/user/Footer";
 import UserHeader from "../components/user/Header";
 
 export default function UserLayout({
@@ -9,6 +10,7 @@ export default function UserLayout({
     <div className="min-h-screen bg-gray-50">
       <UserHeader />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 }

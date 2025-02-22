@@ -1,12 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Mulish:wght@200..1000&family=Teko:wght@300..700&family=Bebas+Neue&family=Roboto+Condensed:wght@400;700&family=Barlow+Condensed:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+
+
+  /* Font Choices */
+  --font-bold-athletic-headings: 'Goldman', sans-serif;
+  --font-bold-athletic-body: 'Oswald', sans-serif;
+
+  --font-modern-sports-headings: 'Teko', sans-serif;
+  --font-modern-sports-body: 'Barlow Condensed', sans-serif;
+
+  --font-stadium-style-headings: 'Bebas Neue', sans-serif;
+  --font-stadium-style-body: 'Roboto Condensed', sans-serif;
+
+  /* Default Font Selection */
+  --font-headings: var(--font-stadium-style-headings); /* Change this to pick a style */
+  --font-body: var(--font-stadium-style-body);         /* Change this to pick a style */
 }
 
+/* Apply Fonts */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+}
+
+body, p, div {
+  font-family: var(--font-body);
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -18,4 +43,19 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
 }
