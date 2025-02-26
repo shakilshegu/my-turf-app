@@ -30,7 +30,7 @@ const UserHeader: React.FC = () => {
   const navItems: NavItem[] = [
     { href: '/browse', icon: Search, label: 'Browse Turfs' },
     { href: '/bookings', icon: Calendar, label: 'My Bookings' },
-    { href: '/login', icon: UserCircle, label: 'Login' }
+    { href: '/auth', icon: UserCircle, label: 'Login' }
   ];
 
   // Initialize GSAP animations

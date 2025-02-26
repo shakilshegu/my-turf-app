@@ -9,7 +9,7 @@ import TurfGallery from "@/app/components/user/TurfGallery";
 import TurfInfo from "@/app/components/user/TurfInfo";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function TurfDetailPage() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState<boolean>(false);
@@ -83,9 +83,8 @@ export default function TurfDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
-      {/* Back navigation */}
       <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link
             href="/turfs"
             className="inline-flex items-center text-gray-600 hover:text-green-600 transition-colors"
@@ -93,40 +92,96 @@ export default function TurfDetailPage() {
             <ChevronLeft className="w-5 h-5 mr-1" />
             Back to Turfs
           </Link>
+
+          <h1 className="text-xl font-bold text-gray-800">{turf.name}</h1>
+
+          {/* Mobile book now button */}
+          <button
+            onClick={() => setIsBookingModalOpen(true)}
+            className="lg:hidden bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium shadow-md transition-all transform hover:scale-105"
+          >
+            Book Now
+          </button>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            <TurfGallery images={turf.images} />
-            <TurfInfo turf={turf} />
-            <Amenities amenities={turf.amenities} />
-            <Reviews reviews={turf.reviews} />
-            <Location address={turf.address} mapUrl={turf.mapUrl} />
+            {/* Turf Images Gallery */}
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+              <TurfGallery images={turf.images} />
+            </div>
+
+            {/* Turf Information */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <TurfInfo turf={turf} />
+            </div>
+
+            {/* Amenities */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <Amenities amenities={turf.amenities} />
+            </div>
+
+            {/* Reviews */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <Reviews reviews={turf.reviews} />
+            </div>
+
+            {/* Location */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <Location address={turf.address} mapUrl={turf.mapUrl} />
+            </div>
           </div>
 
-          <div className="space-y-8">
-            <button
-              onClick={() => setIsBookingModalOpen(true)}
-              className="bg-green-600 text-white px-4 py-2 rounded-lg"
-            >
-              Book Now
-            </button>
+          {/* Sidebar */}
+          <div className=" space-y-6">
+            {/* Sticky booking card - the key improvement */}
+            <div className="sticky top-6 bg-white rounded-xl shadow-sm p-6 border border-green-100">
+              <h2 className="text-xl font-bold text-gray-800 mb-4">
+                Book this turf
+              </h2>
+              <p className="text-gray-600 mb-2">From ${turf.price}/hour</p>
 
-            <BookingModal
-              isOpen={isBookingModalOpen}
-              onClose={() => setIsBookingModalOpen(false)}
-              turf={turf}
-            />
-            <Contact
-              phone={turf.phone}
-              email={turf.email}
-              socialMedia={turf.socialMedia}
-            />
+              {/* Prominent, attractive book now button */}
+              <button
+                onClick={() => setIsBookingModalOpen(true)}
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium shadow-md transition-all transform hover:scale-105 mb-4 flex items-center justify-center"
+              >
+                <span className="mr-2">Book Now</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Contact information */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <Contact
+                phone={turf.phone}
+                email={turf.email}
+                socialMedia={turf.socialMedia}
+              />
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Booking Modal */}
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        turf={turf}
+      />
     </div>
   );
 }
