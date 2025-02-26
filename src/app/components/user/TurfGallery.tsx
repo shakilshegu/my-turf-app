@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface TurfGalleryProps {
@@ -12,7 +13,7 @@ interface TurfGalleryProps {
     return (
       <div className="mb-8">
         <div className="relative h-80 sm:h-96 md:h-[28rem] overflow-hidden rounded-xl shadow-lg mb-2">
-          <img 
+          <Image
             src={images[activeImage]} 
             alt="Turf view" 
             className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
@@ -27,7 +28,7 @@ interface TurfGalleryProps {
                 activeImage === index ? 'ring-2 ring-green-500 scale-105' : 'opacity-70 hover:opacity-100'
               }`}
             >
-              <img src={img} alt={`Turf view ${index + 1}`} className="w-full h-full object-cover" />
+              <Image src={img} alt={`Turf view ${index + 1}`} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>

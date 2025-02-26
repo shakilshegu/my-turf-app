@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import HeroSection from '../components/user/HeroSection';
 import FeaturedTurfs from '../components/user/FeaturedTurfsSection';
 import Benefits from '../components/user/BenefitsSection';

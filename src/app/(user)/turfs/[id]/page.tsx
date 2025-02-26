@@ -1,6 +1,5 @@
 "use client";
 import Amenities from "@/app/components/user/Amenities";
-import BookingCalendar from "@/app/components/user/BookingCalendar";
 import BookingModal from "@/app/components/user/BookingModal";
 import Contact from "@/app/components/user/Contact";
 import Location from "@/app/components/user/Location";
@@ -9,7 +8,7 @@ import TurfGallery from "@/app/components/user/TurfGallery";
 import TurfInfo from "@/app/components/user/TurfInfo";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 
 export default function TurfDetailPage() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState<boolean>(false);

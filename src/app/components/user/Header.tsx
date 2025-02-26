@@ -13,7 +13,8 @@ const UserHeader: React.FC = () => {
   // State
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [activeLink, setActiveLink] = useState<string>("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [activeLink, setActiveLink] = useState<string>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   

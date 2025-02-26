@@ -13,32 +13,34 @@ export default function SearchFilters() {
   const [dateFilter, setDateFilter] = useState('');
   const [viewMode, setViewMode] = useState('grid'); // grid or map
   const [isAdvancedFilter, setIsAdvancedFilter] = useState(false);
-  const [sliderValue, setSliderValue] = useState(1500);
+  const [sliderValue, setSliderValue] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
   
-  const dropdownRef = useRef(null);
-  
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  type FilterType = string;
+
   // Close dropdown on outside click
   useEffect(() => {
-    function handleClickOutside(event:any) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setShowLocationDropdown(false);
       }
     }
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+}, []);
+
 
   // Animate filter addition/removal
-  const addFilter = (type:any, value:any) => {
+  const addFilter = (type: FilterType, value: string) => {
     setIsAnimating(true);
     const newFilter = { id: Date.now(), type, value };
     setSelectedFilters([...selectedFilters, newFilter]);
     setTimeout(() => setIsAnimating(false), 300);
   };
 
-  const removeFilter = (id:any) => {
+  const removeFilter = (id:number) => {
     setSelectedFilters(selectedFilters.filter(filter => filter.id !== id));
   };
 
@@ -259,7 +261,7 @@ export default function SearchFilters() {
                 max="5000"
                 step="100"
                 value={sliderValue}
-                onChange={(e) => setSliderValue(e.target.value)}
+                onChange={(e) => setSliderValue(Number(e.target.value))}
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-500"
               />
               <div className="flex justify-between mt-2">

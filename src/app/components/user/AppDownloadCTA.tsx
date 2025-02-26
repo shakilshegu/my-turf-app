@@ -25,13 +25,6 @@ const AppDownload = () => (
             </Link>
           </div>
         </div>
-        <div className="md:w-1/2">
-          <img
-            src="/api/placeholder/400/600"
-            alt="Mobile app screenshot"
-            className="mx-auto md:ml-auto rounded-xl shadow-xl max-w-xs"
-          />
-        </div>
       </div>
     </div>
   </section>

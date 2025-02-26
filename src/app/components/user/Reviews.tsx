@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import Image from "next/image";
 
 interface Review {
     userName: string;
@@ -26,7 +27,7 @@ const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
           {reviews.slice(0, 3).map((review, index) => (
             <div key={index} className="pb-4 border-b last:border-b-0 last:pb-0">
               <div className="flex items-center mb-2">
-                <img 
+                <Image
                   src={review.userAvatar} 
                   alt={review.userName}
                   className="w-10 h-10 rounded-full mr-3" 

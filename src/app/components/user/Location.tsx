@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, MapPin, Twitter } from "lucide-react";
+import {MapPin} from "lucide-react";
 
 interface LocationProps {
   address: string;

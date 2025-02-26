@@ -2,6 +2,7 @@
 import { MapPin, Star } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 interface HomeTurfCardProps {
   name: string;
@@ -26,7 +27,7 @@ const HomeTurfCard: React.FC<HomeTurfCardProps> = ({ name, location, rating, ima
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative h-48 overflow-hidden group">
-        <img
+        <Image
           src={image}
           alt={name}
           className={`w-full h-full object-cover transition-all duration-700 ${

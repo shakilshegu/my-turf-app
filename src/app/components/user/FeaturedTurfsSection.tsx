@@ -1,5 +1,5 @@
 "use client"
-import { ChevronRight, MapPin, Star } from "lucide-react";
+import { ChevronRight} from "lucide-react";
 import Link from "next/link";
 import HomeTurfCard from "./HomeTurfCard";
 import Image from "next/image";

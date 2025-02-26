@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 const Testimonials = () => {
   const testimonials = [
@@ -57,7 +58,7 @@ const Testimonials = () => {
             >
               <div className="flex items-center mb-4">
                 <div className="mr-4">
-                  <img 
+                  <Image 
                     src={testimonial.image} 
                     alt={`${testimonial.author}`} 
                     className="w-16 h-16 rounded-full object-cover border-2 border-green-400" 
@@ -90,7 +91,7 @@ const Testimonials = () => {
             >
               <div className="flex items-center mb-4">
                 <div className="mr-3">
-                  <img 
+                  <Image 
                     src={testimonials[activeIndex].image} 
                     alt={`${testimonials[activeIndex].author}`} 
                     className="w-12 h-12 rounded-full object-cover border-2 border-green-400" 

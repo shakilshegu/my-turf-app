@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { Edit2 } from 'lucide-react';
 
 interface ProfileHeaderProps {
   profile: {
@@ -11,7 +10,7 @@ interface ProfileHeaderProps {
   onEdit: () => void;
 }
 
-const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isEditing, onEdit }) => {
+const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile}) => {
   return (
     <div className="relative h-72 bg-gradient-to-r from-green-400 to-blue-500">
       {/* Cover Photo */}

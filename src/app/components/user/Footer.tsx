@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { Facebook, Twitter, Instagram, Mail, Phone, MapPin, ChevronDown, ChevronUp } from "lucide-react";
 
 const Footer = () => {
-  const [expandedSection, setExpandedSection] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
   const [isScrolling, setIsScrolling] = useState(false);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   // Update year automatically
   useEffect(() => {
@@ -25,9 +25,10 @@ const Footer = () => {
   };
 
   // Toggle mobile accordion sections
-  const toggleSection = (section:any) => {
-    setExpandedSection(expandedSection === section ? null : section);
+  const toggleSection = (section: string) => {
+    setExpandedSection((prevSection) => (prevSection === section ? null : section));
   };
+  
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white pt-12 pb-6 relative">

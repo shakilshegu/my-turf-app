@@ -1,7 +1,7 @@
 "use client "
 import { useState } from "react";
 import AuthContainer from "./AuthConatiner";
-import { Mail, Lock, User, ArrowRight, Key, ChevronRight } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight} from 'lucide-react';
 
 
 const UserAuth = () => {
@@ -97,8 +97,8 @@ const UserAuth = () => {
             </button>
             
             {isLogin ? (
-              <p className="text-center text-sm text-gray-600">
-                Don't have an account?{' '}
+               <p className="text-center text-sm text-gray-600">
+               Don&apos;t have an account?{' '}
                 <button 
                   type="button"
                   className="text-green-600 font-medium hover:text-green-500"

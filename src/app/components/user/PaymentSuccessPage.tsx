@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckCircle, Calendar, Clock, MapPin, Star, ArrowRight, Share2, Gift } from 'lucide-react';
+import Image from 'next/image';
 
 interface BookingDetails {
   id: string;
@@ -289,7 +290,7 @@ export default function PaymentSuccessComponent() {
                 onClick={() => router.push(`/turf/${turf.id}`)}
               >
                 <div className="relative overflow-hidden">
-                  <img 
+                  <Image 
                     src={turf.image} 
                     alt={turf.name}
                     className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
