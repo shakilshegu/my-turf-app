@@ -1,41 +1,68 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { Menu, X, Home, Calendar, Search, UserCircle } from 'lucide-react';
-import Image from 'next/image';
-import { gsap } from 'gsap';
-import footballIcon from "@/app/assets/footballIcon.svg"
-
-// Types
-interface NavItem {
-  href: string;
-  icon: React.ElementType;
-  label: string;
-}
+import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { Search, Calendar, UserCircle } from "lucide-react";
+import { NavItem, UserProfile } from "./layout/types";
+import MobileNavigation from "./layout/MobileNavigation";
+import MobileMenuButton from "./layout/MobileMenuButton";
+import ProfileMenu from "./layout/ProfileMenu";
+import DesktopNavigation from "./layout/DesktopNavigation";
+import Logo from "./layout/Logo";
 
 const UserHeader: React.FC = () => {
   // State
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [activeLink, setActiveLink] = useState<string>('');
-
+  const [activeLink, setActiveLink] = useState<string>("");
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  
   // Refs
   const headerRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const footballIconRef = useRef<HTMLSpanElement>(null);
-  const menuItemsRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  
+  // Check if user is logged in (example)
+  useEffect(() => {
+    // This would normally come from your auth service
+    const checkUserAuth = () => {
+      // Mock authentication
+      const mockLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      setIsLoggedIn(mockLoggedIn);
 
-  // Navigation items
-  const navItems: NavItem[] = [
-    { href: '/browse', icon: Search, label: 'Browse Turfs' },
-    { href: '/bookings', icon: Calendar, label: 'My Bookings' },
-    { href: '/auth', icon: UserCircle, label: 'Login' }
-  ];
+      if (mockLoggedIn) {
+        // Mock user data - in a real app, you'd fetch this from your API
+        setUserProfile({
+          name: "John Doe",
+          email: "john@example.com",
+        });
+      }
+    };
+
+    checkUserAuth();
+  }, []);
+
+  // Navigation items - dynamically change based on login status
+  const getNavItems = (): NavItem[] => {
+    const baseItems: NavItem[] = [
+      { href: "/browse", icon: Search, label: "Browse Turfs" },
+      { href: "/bookings", icon: Calendar, label: "My Bookings" },
+    ];
+
+    if (!isLoggedIn) {
+      return [
+        ...baseItems,
+        { href: "/auth", icon: UserCircle, label: "Login" },
+      ];
+    }
+
+    return baseItems;
+  };
+
+  const navItems = getNavItems();
 
   // Initialize GSAP animations
   useEffect(() => {
-    if (!headerRef.current || !logoRef.current || !menuItemsRef.current) return;
+    if (!headerRef.current) return;
 
     const tl = gsap.timeline();
 
@@ -43,41 +70,11 @@ const UserHeader: React.FC = () => {
       y: -100,
       opacity: 0,
       duration: 1,
-      ease: "power3.out"
-    })
-    .from(logoRef.current, {
-      scale: 0.5,
-      opacity: 0,
-      duration: 0.8,
-      ease: "elastic.out(1, 0.5)",
-    }, "-=0.5")
-    .from(menuItemsRef.current, {
-      opacity: 0,
-      y: 20,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: "power2.out",
-    }, "-=0.3");
-
-    return () => {
-      tl.kill();
-    };
-  }, []);
-
-  // Football icon animation
-  useEffect(() => {
-    if (!footballIconRef.current) return;
-
-    const rotation = gsap.to(footballIconRef.current, {
-      rotation: 360,
-      duration: 1,
-      ease: "none",
-      repeat: -1,
-      paused: true
+      ease: "power3.out",
     });
 
     return () => {
-      rotation.kill();
+      tl.kill();
     };
   }, []);
 
@@ -90,14 +87,18 @@ const UserHeader: React.FC = () => {
       setScrolled(isScrolled);
 
       gsap.to(headerRef.current, {
-        backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 1)",
-        boxShadow: isScrolled ? "0 4px 6px -1px rgba(0, 0, 0, 0.1)" : "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
-        duration: 0.3
+        backgroundColor: isScrolled
+          ? "rgba(255, 255, 255, 0.9)"
+          : "rgba(255, 255, 255, 1)",
+        boxShadow: isScrolled
+          ? "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+          : "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
+        duration: 0.3,
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Mobile menu animation
@@ -110,120 +111,94 @@ const UserHeader: React.FC = () => {
       height: !isMenuOpen ? "auto" : 0,
       opacity: !isMenuOpen ? 1 : 0,
       duration: 0.3,
-      ease: !isMenuOpen ? "power2.out" : "power2.in"
+      ease: !isMenuOpen ? "power2.out" : "power2.in",
     });
   };
 
   // Link hover animation
   const handleLinkHover = (label: string, isEntering: boolean): void => {
-    setActiveLink(isEntering ? label : '');
+    setActiveLink(isEntering ? label : "");
 
     gsap.to(`[data-link="${label}"]`, {
       scale: isEntering ? 1.1 : 1,
       color: isEntering ? "#059669" : "#374151",
-      duration: 0.3
+      duration: 0.3,
+    });
+  };
+
+  // Handle logout
+  const handleLogout = (): void => {
+    // Clear auth data
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+    setUserProfile(null);
+  };
+
+  // Demo login (for testing)
+  const handleDemoLogin = (): void => {
+    localStorage.setItem("isLoggedIn", "true");
+    setIsLoggedIn(true);
+    setUserProfile({
+      name: "John Doe",
+      email: "john@example.com",
     });
   };
 
   return (
-    <header 
+    <header
       ref={headerRef}
       className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'backdrop-blur-md' : 'bg-white shadow'
+        scrolled ? "backdrop-blur-md" : "bg-white shadow"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="flex-shrink-0" ref={logoRef}>
-            <Link 
-              href="/" 
-              className="text-2xl font-bold text-green-600 flex items-center space-x-2 group"
-              onMouseEnter={() => handleLinkHover('home', true)}
-              onMouseLeave={() => handleLinkHover('home', false)}
-            >
-              <div className="relative">
-                <Home className="w-6 h-6" data-link="home" />
-              </div>
-              <span className="relative">
-                PowerPitch
-                <span 
-                  ref={footballIconRef}
-                  className="absolute -top-1 -right-2 text-yellow-400"
-                >
-                  <Image 
-                    src={footballIcon} 
-                    alt="Football Icon" 
-                    width={20} 
-                    height={20} 
-                  />
-                </span>
-              </span>
-            </Link>
-          </div>
+          <Logo onHover={handleLinkHover} />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-8">
-            {navItems.map((item, index) => (
-              <Link 
-                key={item.label}
-                href={item.href} 
-                className="relative group"
-                ref={el => {
-                  menuItemsRef.current[index] = el;
-                }}
-                onMouseEnter={() => handleLinkHover(item.label, true)}
-                onMouseLeave={() => handleLinkHover(item.label, false)}
+            <DesktopNavigation 
+              navItems={navItems} 
+              onHover={handleLinkHover} 
+            />
+
+            {/* User Profile Section when logged in */}
+            {isLoggedIn && userProfile && (
+              <ProfileMenu 
+                userProfile={userProfile} 
+                onHover={handleLinkHover}
+                onLogout={handleLogout}
+              />
+            )}
+
+            {/* For demo purposes - toggle login state */}
+            {!isLoggedIn && (
+              <button
+                onClick={handleDemoLogin}
+                className="hidden px-3 py-1 bg-green-50 text-green-600 text-xs rounded border border-green-200"
               >
-                <div className="flex items-center space-x-1 px-3 py-2 text-gray-700">
-                  <item.icon className="w-5 h-5" data-link={item.label} />
-                  <span data-link={item.label}>{item.label}</span>
-                </div>
-              </Link>
-            ))}
+                Demo Login
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              className="p-2 rounded-md text-gray-700 hover:text-green-600 focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              <div className="relative w-6 h-6">
-                <span className={`absolute left-0 block w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  isMenuOpen ? 'rotate-45 top-3' : 'top-2'
-                }`} />
-                <span className={`absolute left-0 block w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  isMenuOpen ? 'opacity-0' : 'top-3'
-                }`} />
-                <span className={`absolute left-0 block w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  isMenuOpen ? '-rotate-45 top-3' : 'top-4'
-                }`} />
-              </div>
-            </button>
+            <MobileMenuButton isOpen={isMenuOpen} onClick={toggleMobileMenu} />
           </div>
         </div>
 
         {/* Mobile Menu */}
-        <div 
+        <MobileNavigation 
           ref={mobileMenuRef}
-          className="md:hidden overflow-hidden h-0 opacity-0"
-        >
-          <div className="flex flex-col space-y-1 px-2 pt-2 pb-3 border-t border-gray-200">
-            {navItems.map((item) => (
-              <Link 
-                key={item.label}
-                href={item.href} 
-                className="flex items-center space-x-2 text-gray-700 hover:text-green-600 hover:bg-gray-50 px-3 py-2 rounded-md"
-                onClick={toggleMobileMenu}
-              >
-                <item.icon className="w-5 h-5" />
-                <span>{item.label}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
+          navItems={navItems}
+          isLoggedIn={isLoggedIn}
+          userProfile={userProfile}
+          onMenuToggle={toggleMobileMenu}
+          onLogout={handleLogout}
+          onDemoLogin={handleDemoLogin}
+        />
       </nav>
     </header>
   );
