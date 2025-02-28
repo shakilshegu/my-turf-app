@@ -19,7 +19,7 @@ interface Turf {
   
   import React, { useState } from 'react';
   import { Calendar, Clock, X, ChevronLeft, ChevronRight } from 'lucide-react';
-  import { useRouter } from 'next/router';
+  import { useRouter } from 'next/navigation'; 
   
   const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, turf }) => {
     const router = useRouter();
