@@ -1,4 +1,4 @@
-// Types
+"use client"
 interface Turf {
     id: string;
     name: string;
@@ -19,8 +19,10 @@ interface Turf {
   
   import React, { useState } from 'react';
   import { Calendar, Clock, X, ChevronLeft, ChevronRight } from 'lucide-react';
+  import { useRouter } from 'next/router';
   
   const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, turf }) => {
+    const router = useRouter();
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
     const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
@@ -213,8 +215,8 @@ interface Turf {
               <button
                 onClick={() => {
                   if (selectedSlot) {
-                    alert('Booking confirmed!');
                     onClose();
+                    router.push('/payment-success');
                   }
                 }}
                 disabled={!selectedSlot}
