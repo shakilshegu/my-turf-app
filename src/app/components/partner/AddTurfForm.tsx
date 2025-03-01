@@ -4,16 +4,15 @@ import { motion } from "framer-motion";
 import {
   ArrowLeft,
   Upload,
-  MapPin,
   DollarSign,
   Users,
   Clock,
   CheckCircle,
-  Image,
   Info,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import MapLocationPicker from "./MapLocationPicker";
+import Image from "next/image";
 
 const AddTurfForm = () => {
   const router = useRouter();
@@ -373,7 +372,7 @@ const AddTurfForm = () => {
                     </p>
                     {formData.images.length > 0 && (
                       <div className="mt-2 flex items-center justify-center space-x-2">
-                        <Image className="h-5 w-5 text-green-500" />
+                        <Image src="/your-image-path.png" width={20} height={20} alt="Selected file icon" />
                         <p className="text-sm font-medium text-green-600">
                           {formData.images.length} file(s) selected
                         </p>

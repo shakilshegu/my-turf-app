@@ -3,12 +3,12 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { useRouter, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 // This would come from your database or API in a real application
 const getBookingById = (id: string) => {
   return {
-    id: 'B001',
+    id,
     customerName: 'John Smith',
     customerEmail: 'john.smith@example.com',
     customerPhone: '+1 (555) 123-4567',
@@ -21,9 +21,9 @@ const getBookingById = (id: string) => {
     price: 50,
     location: '123 Main St, Anytown, CA 90210',
     notes: 'Please make sure to close the gate when leaving.',
-    image: '/images/lawn.jpg',
+    image: '/uploads/FAQ1.jpg',
     partnerNotes: 'Customer has a dog, bring treats.',
-    customerAvatar: '/images/john.jpg'
+    customerAvatar: '/uploads/FAQ1.jpg'
   };
 };
 

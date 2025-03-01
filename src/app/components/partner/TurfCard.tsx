@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { MapPin, Calendar, Star } from 'lucide-react';
+import Image from 'next/image';
 
 interface TurfCardProps {
   id: number;
@@ -27,7 +28,7 @@ const TurfCard: React.FC<TurfCardProps> = ({
       className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300"
     >
       <div className="relative h-48">
-        <img 
+        <Image 
           src={image} 
           alt={name} 
           className="w-full h-full object-cover"

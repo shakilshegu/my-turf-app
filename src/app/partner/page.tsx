@@ -242,9 +242,11 @@ const topTurfs = [
                   <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
                     <div className="md:flex">
                       <div className="md:w-1/3">
-                        <img 
+                        <Image 
                           src={turf.image} 
-                          alt={turf.name} 
+                          alt={turf.name}
+                          width={300} 
+                          height={200} 
                           className="h-48 md:h-full w-full object-cover"
                         />
                       </div>

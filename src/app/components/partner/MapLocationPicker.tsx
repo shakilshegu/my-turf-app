@@ -1,7 +1,8 @@
 "use client"
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { MapPin, X, Maximize, Minimize, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface MapLocationPickerProps {
   address: string;
@@ -161,7 +162,7 @@ const MapLocationPicker: React.FC<MapLocationPickerProps> = ({ address, onChange
             <div className="absolute inset-0 pt-10">
               {mapView === 'normal' ? (
                 // Normal map view
-                <img 
+                <Image 
                   src="/api/placeholder/600/300" 
                   alt="Normal map view" 
                   className="w-full h-full object-cover"
@@ -169,7 +170,7 @@ const MapLocationPicker: React.FC<MapLocationPickerProps> = ({ address, onChange
                 />
               ) : (
                 // Satellite view
-                <img 
+                <Image 
                   src="/api/placeholder/600/300" 
                   alt="Satellite map view" 
                   className="w-full h-full object-cover"
