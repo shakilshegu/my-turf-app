@@ -10,14 +10,8 @@
 
 
   /* Font Choices */
-  --font-bold-athletic-headings: 'Goldman', sans-serif;
-  --font-bold-athletic-body: 'Oswald', sans-serif;
-
   --font-modern-sports-headings: 'Teko', sans-serif;
   --font-modern-sports-body: 'Barlow Condensed', sans-serif;
-
-  --font-stadium-style-headings: 'Bebas Neue', sans-serif;
-  --font-stadium-style-body: 'Roboto Condensed', sans-serif;
 
   /* Default Font Selection */
   --font-headings: var(--font-stadium-style-headings); /* Change this to pick a style */
