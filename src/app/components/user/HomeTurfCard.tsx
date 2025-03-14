@@ -1,5 +1,5 @@
 "use client";
-import { MapPin, Star } from "lucide-react";
+import { MapPin, Star, Clock } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
@@ -22,90 +22,71 @@ const HomeTurfCard: React.FC<HomeTurfCardProps> = ({
   index,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-
+  
   return (
     <div
-      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+      className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700"
       style={{
-        animationDelay: `${index * 150}ms`,
-        animation: "fadeInUp 0.8s ease-out forwards",
+        animationDelay: `${index * 100}ms`,
+        animation: "fadeInUp 0.5s ease-out forwards",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative h-48 overflow-hidden group">
+      <div className="relative h-52 overflow-hidden">
         <Image
           src={image}
           alt={name}
-          width={500} // Choose an appropriate size based on your layout
-          height={300} // Choose an appropriate size based on your layout
-          className={`w-full h-full object-cover transition-all duration-700 ${
-            isHovered ? "scale-110 blur-[1px]" : "scale-100"
+          width={500}
+          height={300}
+          className={`w-full h-full object-cover transition-all duration-500 ${
+            isHovered ? "scale-105" : "scale-100"
           }`}
         />
         <div
-          className={`absolute inset-0 bg-black/20 transition-opacity duration-300 ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-300`}
         />
-
-        {/* Animated Price Tag */}
-        <div
-          className={`absolute top-2 right-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full 
-          font-semibold text-green-800 shadow-lg transform transition-all duration-300 ${
-            isHovered ? "translate-y-0 scale-110" : "translate-y-0"
-          }`}
-        >
+        {/* Price Tag */}
+        <div className="absolute top-3 right-3 bg-green-600 px-3 py-1 rounded-md font-semibold text-white shadow-md">
           <span className="text-sm">${price}</span>
-          <span className="text-xs text-green-600">/hr</span>
+          <span className="text-xs">/hr</span>
+        </div>
+        
+        {/* Location on image */}
+        <div className="absolute bottom-3 left-3 flex items-center text-white">
+          <MapPin size={16} className="mr-1" />
+          <span className="text-sm font-medium">{location}</span>
         </div>
       </div>
-
-      <div className="p-4 relative">
-        {/* Card Content with Hover Effects */}
-        <h3 className="font-bold text-lg mb-2 transform transition-all duration-300 hover:text-green-600">
-          {name}
-        </h3>
-
-        <div
-          className={`flex items-center text-gray-600 mb-2 transition-all duration-300 ${
-            isHovered ? "text-green-600" : ""
-          }`}
-        >
-          <MapPin
-            size={16}
-            className={`mr-1 transition-transform duration-300 ${
-              isHovered ? "scale-110" : ""
-            }`}
-          />
-          <span className="text-sm">{location}</span>
+      
+      <div className="p-4">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="font-bold text-lg text-gray-100">{name}</h3>
+          <div className="flex items-center text-amber-400">
+            <Star size={16} className="mr-1" fill="currentColor" />
+            <span className="font-medium">{rating}</span>
+          </div>
         </div>
-
-        <div className="flex items-center text-amber-500 mb-4">
-          <Star
-            size={16}
-            className={`mr-1 transition-transform duration-300 ${
-              isHovered ? "scale-110 rotate-12" : ""
-            }`}
-            fill="currentColor"
-          />
-          <span className="font-medium">{rating}</span>
-          <div className="ml-1 w-20 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+        
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex items-center text-gray-400">
+            <Clock size={16} className="mr-1" />
+            <span className="text-sm">Available today</span>
+          </div>
+          <div className="h-1.5 w-16 bg-gray-700 rounded-full overflow-hidden">
             <div
-              className="h-full bg-amber-500 rounded-full transition-all duration-500"
+              className="h-full bg-green-500 rounded-full"
               style={{ width: `${(rating / 5) * 100}%` }}
             />
           </div>
         </div>
-
+        
         <Link
           href={`/turfs/${name.toLowerCase().replace(/ /g, "-")}`}
-          className={`block w-full text-center py-2.5 rounded-lg font-medium transition-all duration-300 
-            ${
-              isHovered
-                ? "bg-green-600 text-white shadow-lg shadow-green-600/20 transform scale-105"
-                : "bg-green-100 text-green-700"
-            }`}
+          className={`block w-full text-center py-2.5 rounded-md font-medium transition-all duration-300 
+            ${isHovered 
+              ? "bg-green-500 text-white" 
+              : "bg-gray-700 text-green-400 border border-green-500"}`}
         >
           Book Now
         </Link>

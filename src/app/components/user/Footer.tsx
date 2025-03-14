@@ -31,7 +31,7 @@ const Footer = () => {
   
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white pt-12 pb-6 relative">
+    <footer className="  text-white pt-12 pb-6 relative">
       {/* Decorative top border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600"></div>
       

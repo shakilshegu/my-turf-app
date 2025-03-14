@@ -81,8 +81,8 @@ export default function TurfDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-16">
-      <div className="bg-white shadow-sm">
+    <div className="min-h-screen  pb-16">
+      <div className=" shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link
             href="/turfs"
@@ -108,27 +108,27 @@ export default function TurfDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             {/* Turf Images Gallery */}
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div className=" rounded-xl shadow-sm overflow-hidden">
               <TurfGallery images={turf.images} />
             </div>
 
             {/* Turf Information */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className=" rounded-xl shadow-sm p-6">
               <TurfInfo turf={turf} />
             </div>
 
             {/* Amenities */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className=" rounded-xl shadow-sm p-6">
               <Amenities amenities={turf.amenities} />
             </div>
 
             {/* Reviews */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className=" rounded-xl shadow-sm p-6">
               <Reviews reviews={turf.reviews} />
             </div>
 
             {/* Location */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className=" rounded-xl shadow-sm p-6">
               <Location address={turf.address} mapUrl={turf.mapUrl} />
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function TurfDetailPage() {
           {/* Sidebar */}
           <div className=" space-y-6">
             {/* Sticky booking card - the key improvement */}
-            <div className="sticky top-6 bg-white rounded-xl shadow-sm p-6 border border-green-100">
+            <div className="sticky top-6 e rounded-xl shadow-sm p-6 border border-green-100">
               <h2 className="text-xl font-bold text-gray-800 mb-4">
                 Book this turf
               </h2>
@@ -164,7 +164,7 @@ export default function TurfDetailPage() {
             </div>
 
             {/* Contact information */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className=" rounded-xl shadow-sm p-6">
               <Contact
                 phone={turf.phone}
                 email={turf.email}

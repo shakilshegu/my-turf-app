@@ -7,9 +7,9 @@ interface LocationProps {
 
 const Location: React.FC<LocationProps> = ({ address, mapUrl }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+    <div className=" rounded-xl bg-gray-800 shadow-md p-6 mb-8">
       <h2 className="text-xl font-semibold text-gray-900 mb-4">Location</h2>
-      <div className="bg-gray-100 rounded-lg overflow-hidden h-64 mb-4">
+      <div className="rounded-lg overflow-hidden h-64 mb-4">
         <iframe
           src={mapUrl}
           width="100%"

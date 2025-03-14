@@ -40,7 +40,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-r from-green-800 to-green-700 text-white">
+    <section className="py-12  text-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-3 md:mb-4">
           What Our Users Say
@@ -55,7 +55,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-lg transform transition duration-300 hover:scale-105"
+              className=" backdrop-blur-lg p-6 rounded-xl shadow-lg transform transition duration-300 hover:scale-105"
             >
               <div className="flex items-center mb-4">
                 <div className="mr-4">

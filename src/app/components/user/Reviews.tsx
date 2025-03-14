@@ -15,7 +15,7 @@ interface ReviewsProps {
 
 const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+    <div className="rounded-xl bg-gray-800 shadow-md p-6 mb-8">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-gray-900">Reviews</h2>
         <span className="text-green-600 font-medium cursor-pointer hover:underline">

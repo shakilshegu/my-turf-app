@@ -127,9 +127,9 @@ const Benefits = () => {
   };
 
   return (
-    <section className="py-16 bg-white overflow-hidden" ref={containerRef}>
+    <section className="py-16 " ref={containerRef}>
       <div className="container mx-auto px-4">
-        <h2 className="benefits-title text-3xl font-bold text-center text-gray-800 mb-12">
+        <h2 className="benefits-title text-3xl font-bold text-center text-white mb-12">
           Why Choose Us
         </h2>
         
@@ -151,7 +151,7 @@ const Benefits = () => {
                 {benefit.icon}
               </div>
               <h3 className="text-xl font-semibold mb-3">{benefit.title}</h3>
-              <p className="text-gray-600">{benefit.description}</p>
+              <p className="text-white">{benefit.description}</p>
             </div>
           ))}
         </div>
